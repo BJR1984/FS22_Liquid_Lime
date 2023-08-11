@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="67">
+	<author>BJR1984</author>
+	<contributors>
+		<contributor>Fusion Simulations, Loki_79, FearlessStudios</contributor>
+	</contributors>
+	<version>1.0.0.0</version>
+	<title>
+		<en>Liquid Lime</en>
+	</title>
+	<description>
+		<en><![CDATA[Liquid Lime
+
+Adds Liquid Lime to the game for Sprayers.
+
+Liquid Lime Tank:
+- Capacity: 2000
+- Price: 2200]]></en>
+	</description>
+	<iconFilename>icon_limeTankHelm.dds</iconFilename>
+	<multiplayer supported="true"/>
+	<fillTypes filename="xml/fillTypes.xml"/>
+	<extraSourceFiles>
+		<sourceFile filename="liquidlime.lua"/>
+	</extraSourceFiles>
+
+	<storeItems>
+		<storeItem xmlFilename="objects/pallets/liquidTank/limeTank.xml"/>
+		<storeItem xmlFilename="objects/pallets/liquidTank/limeTankHelm.xml"/>
+	</storeItems>
+	
+	<l10n>
+		<text name="fillType_liquidLime">
+			<en>Liquid Lime</en>
+		</text>
+		<text name="function_limeTank">
+			<en>Liquid Lime allows you to fill sprayers.</en>
+		</text>
+		<text name="hudExtensionSprayer_headline_ph_liquidlime">
+			<en>Lime, Liquid Lime</en>
+		</text>
+	</l10n>
+</modDesc>
