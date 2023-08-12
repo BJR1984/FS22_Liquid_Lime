@@ -32,20 +32,14 @@ local function injectPrecisionFarmingFunctions()
 	
 	print("  BJR1984-INFO: Injecting LIQUIDLIME into Precision Farming")
 
---[=[
-	local function newHUDExtension(self, superFunc, vehicle, uiScale, uiTextColor, uiTextSize)
-		
-		local HUDExtension = superFunc(self, vehicle, uiScale, uiTextColor, uiTextSize)
-		local texts = HUDExtension.texts
-		
-		texts['headline_n_liquidFertilizer_ORIGINAL'] = HUDExtension.texts.headline_n_liquidFertilizer
-		texts['headline_n_liquidFertilizer_LIQUIDLIME'] = HUDExtension.texts.headline_n_liquidFertilizer:gsub("Liquid Lime", "LIQUIDLIME")
-		
-		return HUDExtension
+	local function newLiquidLimeExtendedSprayerHUDExtension(self, superFunc, vehicle, uiScale, uiTextColor, uiTextSize)
+		local self = VehicleHUDExtension.new( _G['FS22_precisionFarming'].ExtendedSprayerHUDExtension_mt, vehicle, uiScale, uiTextColor, uiTextSize)
+		self.texts = {}
+		self.texts.headline_ph_liquidlime = g_i18n:getText("hudExtensionSprayer_headline_ph_liquidlime", "LIQUIDLIME")
+		return self
 	end
-]=]
-	local function liquidLimeExtendedSprayerHUDExtension(self, superFunc, leftPosX, rightPosX, posY)
-		local ExtendedSprayerHUDExtension = _G['FS22_precisionFarming'].ExtendedSprayerHUDExtension --Check if needed
+
+	local function drawLiquidLimeExtendedSprayerHUDExtension(self, superFunc, leftPosX, rightPosX, posY)
 		if not self:canDraw() then
 			return
 		end
@@ -77,16 +71,13 @@ local function injectPrecisionFarmingFunctions()
 			end
 		end
 
-		local hasLimeLoaded = false
 		local fillTypeDesc
 		local sourceVehicle, fillUnitIndex = self:getFillTypeSourceVehicle(self.vehicle)
 		local sprayFillType = sourceVehicle:getFillUnitFillType(fillUnitIndex)
 		fillTypeDesc = g_fillTypeManager:getFillTypeByIndex(sprayFillType)
 		local massPerLiter = (fillTypeDesc.massPerLiter / FillTypeManager.MASS_SCALE)
 
-		if sprayFillType == FillType.LIQUIDLIME then
-			hasLimeLoaded = true
-		else
+		if sprayFillType ~= FillType.LIQUIDLIME then
 			return superFunc(self, leftPosX, rightPosX, posY)
 		end
 
@@ -389,9 +380,9 @@ local function injectPrecisionFarmingFunctions()
 	return posY
 	end
 	
-	local ExtendedSprayerHUDExtension = _G['FS22_precisionFarming'].ExtendedSprayerHUDExtension
-	--HUDExtension.new = Utils.appendedFunction(HUDExtension.new, newHUDExtension)
-	ExtendedSprayerHUDExtension.draw = Utils.overwrittenFunction(ExtendedSprayerHUDExtension.draw, liquidLimeExtendedSprayerHUDExtension)
+	local LiquidLimeExtendedSprayerHUDExtension = _G['FS22_precisionFarming'].ExtendedSprayerHUDExtension
+--	LiquidLimeExtendedSprayerHUDExtension.new = Utils.appendedFunction(LiquidLimeExtendedSprayerHUDExtension.new, newLiquidLimeExtendedSprayerHUDExtension)
+	LiquidLimeExtendedSprayerHUDExtension.draw = Utils.overwrittenFunction(LiquidLimeExtendedSprayerHUDExtension.draw, drawLiquidLimeExtendedSprayerHUDExtension)
 
 --Utils.prependedFunction
 --Utils.appendedFunction
