@@ -31,14 +31,14 @@ local function injectPrecisionFarmingFunctions()
 	end
 	
 	print("  BJR1984-INFO: Injecting LIQUIDLIME into Precision Farming")
-
+--[[
 	local function newLiquidLimeExtendedSprayerHUDExtension(self, superFunc, vehicle, uiScale, uiTextColor, uiTextSize)
 		local self = VehicleHUDExtension.new( _G['FS22_precisionFarming'].ExtendedSprayerHUDExtension_mt, vehicle, uiScale, uiTextColor, uiTextSize)
 		self.texts = {}
 		self.texts.headline_ph_liquidlime = g_i18n:getText("hudExtensionSprayer_headline_ph_liquidlime", "LIQUIDLIME")
 		return self
 	end
-
+]]
 	local function drawLiquidLimeExtendedSprayerHUDExtension(self, superFunc, leftPosX, rightPosX, posY)
 		if not self:canDraw() then
 			return
