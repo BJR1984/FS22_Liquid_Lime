@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="67">
+
 	<author>BJR1984</author>
+
 	<contributors>
 		<contributor>Fusion Simulations, Loki_79, FearlessStudios</contributor>
 	</contributors>
+
 	<version>1.0.0.0</version>
+
 	<title>
 		<en>Liquid Lime</en>
+		<de>Flüssiger Kalk</de>
+		<fr>Chaux liquide</fr>
 	</title>
+
 	<description>
 		<en><![CDATA[Liquid Lime
 
@@ -16,12 +23,30 @@ Adds Liquid Lime to the game for Sprayers.
 Liquid Lime Tank:
 - Capacity: 2000
 - Price: 2200]]></en>
+		<de><![CDATA[Flüssiger Kalk
+		
+Fügt dem Spiel für Sprüher flüssigen Kalk hinzu.
+			
+Flüssiger Kalktank:
+- Kapazität: 2000
+- Preis: 2200]]></de>
+		<fr><![CDATA[Chaux liquide
+			
+Ajoute de la chaux liquide au jeu pour les pulvérisateurs.
+
+Réservoir de chaux liquide:
+- Capacité: 2000
+- Prix: 2200]]></fr>
 	</description>
+
 	<iconFilename>icon_limeTankHelm.dds</iconFilename>
+
 	<multiplayer supported="true"/>
-	<fillTypes filename="xml/fillTypes.xml"/>
+
+	<fillTypes filename="maps/fillTypes.xml"/>
+
 	<extraSourceFiles>
-		<sourceFile filename="liquidlime.lua"/>
+		<sourceFile filename="scripts/liquidlime.lua"/>
 	</extraSourceFiles>
 
 	<storeItems>
@@ -32,12 +57,19 @@ Liquid Lime Tank:
 	<l10n>
 		<text name="fillType_liquidLime">
 			<en>Liquid Lime</en>
+			<de>Flüssiger Kalk</de>
+			<fr>Chaux liquide</fr>
 		</text>
 		<text name="function_limeTank">
 			<en>Liquid Lime allows you to fill sprayers.</en>
+			<de>Mit Flüssiger Kalk können Sie Sprühgeräte befüllen.</de>
+			<fr>Chaux Liquide vous permet de remplir les pulvérisateurs.</fr>
 		</text>
 		<text name="hudExtensionSprayer_headline_ph_liquidlime">
 			<en>Lime, Liquid Lime</en>
+			<de>Kalk, Flüssiger Kalk</de>
+			<fr>Chaux, Chaux Liquide</fr>
 		</text>
 	</l10n>
+
 </modDesc>
