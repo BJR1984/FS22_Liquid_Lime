@@ -11,7 +11,6 @@
 	<fillTypeCategories>
 		<fillTypeCategory name="LIQUID">LIQUIDLIME</fillTypeCategory>
 		<fillTypeCategory name="SPRAYER">LIQUIDLIME</fillTypeCategory>
-		<fillTypeCategory name="SLURRYTANK">LIQUIDLIME</fillTypeCategory>
 	</fillTypeCategories>
 	<fillTypeSound fillTypes="LIQUIDLIME">
 		<sound template="DEFAULT_REFUEL_SOUND"/>
