@@ -1,448 +1,102 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<modDesc descVersion="75">
-    <author>GtX</author>
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="77">
+
+	<author>BJR1984</author>
+
+	<contributors>
+		<contributor>Fusion Simulations, Loki_79, FearlessStudios</contributor>
+	</contributors>
+
+	<version>1.0.0.0</version>
+
+	<title>
+		<en>Liquid Lime</en>
+		<de>Flüssiger Kalk</de>
+		<fr>Chaux Liquide</fr>
+		<ru>Жидкая Известь</ru>
+		<cz>Tekuté Vápno</cz>
+	</title>
+
+	<description>
+		<en><![CDATA[Liquid Lime
+
+Adds Liquid Lime to the game for Sprayers.
+Precision Farming DLC supported.
+
+Liquid Lime Tank:
+- Capacity: 2000
+- Price: 2200]]></en>
+		<de><![CDATA[Flüssiger Kalk
+
+Fügt dem Spiel für Sprüher flüssigen Kalk hinzu.
+Precision Farming DLC abgestützt.
+
+Flüssiger Kalktank:
+- Kapazität: 2000
+- Preis: 2200]]></de>
+		<fr><![CDATA[Chaux liquide
+
+Ajoute de la chaux liquide au jeu pour les pulvérisateurs.
+Precision Farming DLC supporté.
+
+Réservoir de chaux liquide:
+- Capacité: 2000
+- Prix: 2200]]></fr>
+		<ru><![CDATA[Жидкая известь
+		
+Добавляет жидкую известь в игру для опрыскивателей.
+Поддерживается DLC «Точное земледелие».
+
+Резервуар для жидкой извести:
+- Вместимость: 2000
+- Цена: 2200]]></ru>
+		<cz><![CDATA[Tekuté Vápno
+		
+Přidá tekuté vápno do hry pro postřikovače.
+Precision Farming DLC podporováno.
+
+Nádrž na tekuté vápno:
+- Kapacita: 2000
+- Cena: 2200]]></cz>
+	</description>
+
+	<iconFilename>icon_liquidlime.dds</iconFilename>
+
+	<multiplayer supported="true"/>
+
+	<fillTypes filename="maps/fillTypes.xml"/>
+
+	<extraSourceFiles>
+		<sourceFile filename="scripts/liquidlime.lua"/>
+	</extraSourceFiles>
+
+	<storeItems>
+		<storeItem xmlFilename="objects/pallets/liquidTank/limeTank.xml"/>
+		<storeItem xmlFilename="objects/pallets/liquidTank/limeTankHelm.xml"/>
+	</storeItems>
+	
+	<l10n>
+		<text name="fillType_liquidLime">
+			<en>Liquid Lime</en>
+			<de>Flüssiger Kalk</de>
+			<fr>Chaux Liquide</fr>
+			<ru>Жидкая Известь</ru>
+			<cz>Tekuté Vápno</cz>
+		</text>
+		<text name="function_limeTank">
+			<en>Liquid Lime allows you to fill sprayers.</en>
+			<de>Mit Flüssiger Kalk können Sie Sprühgeräte befüllen.</de>
+			<fr>Chaux Liquide vous permet de remplir les pulvérisateurs.</fr>
+			<ru>Жидкая известь позволяет заправлять опрыскиватели.</ru>
+			<cz>Tekuté vápno umožňuje plnit postřikovače.</cz>
+		</text>
+		<text name="hudExtensionSprayer_headline_ph_liquidlime">
+			<en>pH Value - Liquid Lime Application</en>
+			<de>Kalk, Flüssiger Kalk</de>
+			<fr>Chaux, Chaux Liquide</fr>
+			<ru>Значение рН - Применение жидкой извести</ru>
+			<cz>Hodnota pH - aplikace tekutého vápna</cz>
+		</text>
+	</l10n>
 
-    <version>1.2.0.1</version>
-
-    <title>
-        <en>Object Storage</en>
-        <de>Objekt-Lager</de>
-        <fr>Stockage D'objets</fr>
-        <es>Almacenamiento De Objetos</es>
-        <ru>Хранилище Объектов</ru>
-        <cz>Skladování Objektů</cz>
-    </title>
-
-    <description>
-        <en>
-            <![CDATA[The original bale and pallet storage solution from FS17 and FS19 returns! Now with global menu (GUI) access it is even easier to see what bales or pallets you have in storage.
-
-Featuring fill type and bale size configuration (When available), allowing the user to choose what is stored in each building and removing the need for individual store items for every fill type or bale size.
-
-All objects stored using this system will be returned to the user just as delivered including but not limited to capacity, fill level and bale wrap colour.
-
-Bales that are fermenting when delivered will continue to do so when in storage.
-
-This global mods also includes 7 buildings for bale and pallet storage and support for external mods to make use of its features without requiring individual scripts and menus for every mod.
-
-
-# Included Placeables #
-
-Covered Bale Stack:
-- Price: 1200 $
-- Daily Upkeep: 5 $
-- Round Bales: 125 cm > 180 cm
-- Square Bales: 180 cm > 240 cm
-- Bale Fill Types: All bales fill types registered as part of the map and within the size ranges above can be stored.
-
-Small Covered Bale Stack:
-- Price: 720 $
-- Daily Upkeep: 5 $
-- Square Bales: 49 cm > 120 cm
-- Bale Fill Types: All bales fill types registered as part of the map and within the size ranges above can be stored.
-
-Bale Shelter:
-- Price: 12400 $
-- Daily Upkeep: 10 $
-- Round Bales: 125 cm > 238 cm
-- Square Bales: 180 cm > 488 cm
-- Bale Fill Types: All bales fill types registered as part of the map and within the size ranges above can be stored.
-
-Shelf System:
-- Price: 4200 $
-- Daily Upkeep: 8 $
-- Pallet Fill Types: Seed, Pig Food, Lime, Oat (Horse Feed), Wheat (Chicken Feed), Road Salt, Fertilizer, Liquid Fertilizer, Herbicide, Mineral Feed, Wool, Potato, Sugarcane, Poplar, Silage Additive, Seed Treating Liquid and LumiGEN
-
-Small Shelf System:
-- Price: 2100 $
-- Daily Upkeep: 4 $
-- Pallet Fill Types: Seed, Pig Food, Lime, Oat (Horse Feed), Wheat (Chicken Feed), Road Salt, Fertilizer, Liquid Fertilizer, Herbicide, Mineral Feed, Wool, Potato, Sugarcane, Poplar, Silage Additive, Seed Treating Liquid and LumiGEN
-
-Small Pallet Shed:
-- Price: 19300 $
-- Daily Upkeep: 10 $
-- Pallet Fill Types: Most fill type pallets when correctly registered on map.
-
-Pallet Warehouse:
-- Price: 94800 $
-- Daily Upkeep: 30 $
-- Pallet Fill Types: Most fill type pallets when correctly registered on map.
-
-
-# Placeable Notes #
-- Spawn area markers can be disabled for each of the above buildings individually by standing in the spawn area if not required.
-- Input triggers can be disabled via the GUI to allow easier movement of bales after spawning or as required.
-- Some buildings include colour selection when placing via construction screen.
-
-
-Changelog 1.2.0.1:
-- Fix non critical error message 'duplicate spec name' displayed after game update 1.10.1.1
-- Spanish (es) translations added.
-
-
-Changelog 1.2.0.0:
-- Fix conflict with new object storage specialisation added in game update 1.9.0.0
-- Czech (cz) translations added.
-
-Added 1 new placeable building:
-- Bale Shelter: A three sided shelter with 4 configurable storage areas
-
-
-Changelog 1.1.0.0:
-Improved warning message displayed when delivering a bale that does not match the current configuration for the storage area.
-Added support to 'Shelf System' for 'MaizePlus' pallet fill types (at time of release) when mod is active on the map.
-
-Added 3 new placeable buildings:
-- Small Shelf System: A half length shelf with 3 configurable storage areas
-- Small Pallet Storage: An old shed converted to a coldroom with 3 configurable storage areas, includes animated cooling fan and sound.
-- Pallet Warehouse: A large warehouse with 8 configurable storage areas, animated cooling fans and sounds for some areas.
-
-
-Changelog 1.0.1.0:
-Fix log warning and missing visibility node textures for 'MaizePlus' bales and other mod bales added to bale list without providing a mod environment or base directory.
-
-]]>
-        </en>
-        <de>
-            <![CDATA[Die ursprüngliche Ballen- und Palettenlagerlösung aus FS17 und FS19 kehrt zurück! Jetzt mit globalem Menüzugriff (GUI) ist es noch einfacher zu sehen, welche Ballen oder Paletten Sie im Lager haben.
-
-Mit der Konfiguration von Fülltyp und Ballengröße (sofern verfügbar) kann der Benutzer auswählen, was in jedem Gebäude gelagert wird, und es ist nicht mehr notwendig, für jeden Fülltyp oder jede Ballengröße individuelle Lagerobjekte zu erstellen.
-
-Alle mit diesem System gelagerten Objekte werden dem Benutzer so zurückgegeben, wie sie geliefert wurden, einschließlich, aber nicht beschränkt auf Kapazität, Füllstand und Farbe der Ballenverpackung.
-
-Ballen, die bei der Auslieferung gären, gären auch im Lager weiter.
-
-Diese globale Mod enthält außerdem 7 Gebäude für die Lagerung von Ballen und Paletten sowie Unterstützung für externe Mods, um die Funktionen zu nutzen, ohne dass individuelle Skripte und Menüs für jeden Mod erforderlich sind.
-
-
-# Enthaltene platzierbare Gebäude #
-
-Überdachter Ballenunterstand:
-- Preis: 1200 €
-- Unterhalt: 5 €/Tag
-- Rundballen: 125 cm > 180 cm
-- Quaderballen: 180 cm > 240 cm
-- Ballenfülltypen: Alle Ballenfülltypen, die als Teil der Karte registriert sind und innerhalb der oben genannten Größenbereiche liegen, können gelagert werden.
-
-Kleiner überdachter Ballenunterstand:
-- Preis: 720 €
-- Unterhalt: 5 €/Tag
-- Quaderballen: 49 cm > 120 cm
-- Ballenfülltypen: Alle Ballenfülltypen, die als Teil der Karte registriert sind und innerhalb der oben genannten Größenbereiche liegen, können gelagert werden.
-
-Ballenschutz:
-- Preis: 12400 €
-- Unterhalt: 10 €/Tag
-- Rundballen: 125 cm > 238 cm
-- Quaderballen: 180 cm > 488 cm
-- Ballenfülltypen: Alle Ballenfülltypen, die als Teil der Karte registriert sind und innerhalb der oben genannten Größenbereiche liegen, können gelagert werden.
-
-Regalsystem:
-- Preis: 4200 €
-- Unterhalt: 8 €/Tag
-- Palettenfülltypen: Saatgut, Schweinefutter, Kalk, Hafer (Pferdefutter), Weizen (Hühnerfutter), Streusalz, Mineraldünger, Flüssigdünger, Herbizid, Mineralfutter, Wolle, Kartoffeln, Zuckerrohr, Pappeln, Siliermittel, Beizmittel und LumiGEN
-
-Kleines Regallager:
-- Preis: 2100 €
-- Unterhalt: 4 €/Tag
-- Palettenfülltypen: Saatgut, Schweinefutter, Kalk, Hafer (Pferdefutter), Weizen (Hühnerfutter), Streusalz, Mineraldünger, Flüssigdünger, Herbizid, Mineralfutter, Wolle, Kartoffeln, Zuckerrohr, Pappeln, Siliermittel, Beizmittel und LumiGEN
-
-Kleiner Palettenschuppen:
-- Preis: 19300 €
-- Unterhalt: 10 €/Tag
-- Palettenfülltypen: Die meisten Fülltyppaletten werden korrekt auf der Karte registriert.
-
-Palettenlager:
-- Preis: 94800 €
-- Unterhalt: 30 €/Tag
-- Palettenfülltypen: Die meisten Fülltyppaletten werden korrekt auf der Karte registriert.
-
-
-# Notizen für platzierbare Gebäude #
-- Spawn-Bereichsmarker können für jedes der oben genannten Gebäude einzeln deaktiviert werden, indem man sich in den Spawn-Bereich stellt, wenn sie nicht benötigt werden.
-- Input-Trigger können über die GUI deaktiviert werden, um eine einfachere Bewegung der Ballen nach dem Spawnen oder bei Bedarf zu ermöglichen.
-- Einige Gebäude beinhalten eine Farbauswahl beim Platzieren über den Konstruktionsbildschirm.
-
-
-Changelog 1.2.0.1:
-- Behebung der unkritischen Fehlermeldung 'duplicate spec name', die nach dem Spielupdate 1.10.1.1 angezeigt wird
-- Spanisch (es) Übersetzung hinzugefügt.
-
-
-Changelog 1.2.0.0:
-- Konflikt mit der neuen Objektspeicher-Spezialisierung aus dem Spiel-Update 1.9.0.0 gefixt.
-- Tschechische (cz) Übersetzung hinzugefügt.
-
-1 neues platzierbares Gebäude hinzugefügt:
-- Ballenunterstand: Ein dreiseitiger Unterstand mit 4 konfigurierbaren Lagerbereichen.
-
-
-Changelog 1.1.0.0:
-Verbesserte Warnmeldung, die angezeigt wird, wenn ein Ballen geliefert wird, der nicht der aktuellen Konfiguration für den Lagerbereich entspricht.
-Unterstützung für 'Regalsystem' für 'MaizePlus'-Palettenfülltypen (zum Zeitpunkt der Veröffentlichung) hinzugefügt, wenn der Mod auf der Karte aktiv ist.
-
-3 neue platzierbare Gebäude hinzugefügt:
-- Kleines Regalsystem: Ein halblanges Regal mit 3 konfigurierbaren Ablagebereichen
-- Kleines Palettenlager: Ein alter Schuppen, der in einen Kühlraum mit 3 konfigurierbaren Lagerbereichen umgewandelt wurde, enthält einen animierten Kühlventilator und Sound.
-- Palettenlager: Ein großes Lager mit 8 konfigurierbaren Lagerbereichen, animierten Kühlgebläsen und Geräuschen für einige Bereiche.
-
-Changelog 1.0.1.0:
-Protokollwarnung und fehlende Sichtbarkeitsknotentexturen für 'MaizePlus' Ballen und andere Mod-Ballen behoben, die zur Ballenliste hinzugefügt wurden, ohne eine Mod-Umgebung oder ein Basisverzeichnis bereitzustellen
-
-]]>
-        </de>
-        <fr>
-            <![CDATA[Voici le retour des plaçables de stockage des bottes et palettes précédement disponibles dans FS17 et FS19 ! A présent disponibles avec une interface graphique pour visualiser encore plus simplement leur contenu aussi bien en bottes qu'en palettes.
-
-Chaque bâtiment pourra à présent être configuré pour accepter les types et tailles de bottes souhaités (selon la carte utilisée). Cela permet d'éviter la multiplication des bâtiments dans le magasin pour correspondre à chaque type et taille de bottes.
-
-Tout objet stocké avec cette solution sera restitué dans son état initial (incluant entre autre la capacité, le niveau de remplissage et la couleur de l'enrubannage).
-
-Les bottes en cours de fermentation qui seront stockées continueront leur fermentation si nécessaire.
-
-Ce mod global inclus 7 bâtiments pour le stockage des bottes et palettes mais également le support de mods externes qui peuvent faire appel à la bibliothèque de scripts de ce mod.
-
-
-# Bâtiments inclus #
-
-Entrepôt A Bottes:
-- Prix: 1200 €
-- Entretien journalier: 5 €
-- Bottes rondes: 125 cm > 180 cm
-- Bottes carrées: 180 cm > 240 cm
-- Types De Bottes: Tous types de bottes disponibles sur la carte et dans l'intervalle de taille indiqué.
-
-Petit Entrepôt A Bottes:
-- Prix: 720 €
-- Entretien journalier: 5 €
-- Bottes carrées: 49 cm > 120 cm
-- Bale Fill Types: Tous types de bottes disponibles sur la carte et dans l'intervalle de taille indiqué.
-
-Abris à bottes:
-- Prix: 12400 €
-- Entretien journalier: 10 €
-- Bottes rondes: 125 cm > 238 cm
-- Bottes carrées: 180 cm > 488 cm
-- Types De Bottes: Tous types de bottes disponibles sur la carte et dans l'intervalle de taille indiqué.
-
-Etagères:
-- Prix: 4200 €
-- Entretien journalier: 8 €
-- Type de palettes: Semences, Nourriture pour cochons, Chaux, Avoine (Nourriture pour chevaux), Blé (Nourriture pour volailles), Sel de déneigement, Engrais solide, Engrais liquide, Herbicide, Complément minéral, Laine, Pommes de terre, Canne à Sucre, Peupliers, Additif d'ensilage, Traitement liquide des semences et LumiGEN
-
-Rack à palette:
-- Prix: 2100 €
-- Entretien journalier: 4 €
-- Type de palettes: Semences, Nourriture pour cochons, Chaux, Avoine (Nourriture pour chevaux), Blé (Nourriture pour volailles), Sel de déneigement, Engrais solide, Engrais liquide, Herbicide, Complément minéral, Laine, Pommes de terre, Canne à Sucre, Peupliers, Additif d'ensilage, Traitement liquide des semences et LumiGEN
-
-Abris pour palette:
-- Prix: 19300 €
-- Entretien journalier: 10 €
-- Type de palettes: La plupart des palettes de type remplissage lorsqu'elles sont correctement enregistrées sur la carte.
-
-Entrepôt à palette:
-- Prix: 94800 €
-- Entretien journalier: 30 €
-- Type de palettes: La plupart des palettes de type remplissage lorsqu'elles sont correctement enregistrées sur la carte.
-
-
-# Notes complémentaires #
-- Les délimiteurs des zones de déchargement peuvent être masqués en marchant dessus et via une touche dans le menu F1.
-- Les zones de chargement peuvent être désactivées via l'interface graphique afin de faciliter une manoeuvre ou le mouvement des bottes entre elles.
-- Certains bâtiments disposent du choix de leur couleur lorsqu'ils sont placés via l'écran de construction.
-
-
-Changelog 1.2.0.1:
-- Correction d'un message d'erreur non critique "duplicate spec name" affiché après la mise à jour du jeu 1.10.1.1
-- Traductions en Espagnol (es) ajoutées
-
-
-Changelog 1.2.0.0:
-- Correction d'un conflit avec la nouvelle spécialisation de stockage d'objets ajoutée dans la mise à jour du jeu 1.9.0.0
-- Traductions en tchèque (cz) ajoutées
-
-Ajout d'un nouvel abris :
-- Abris à bottes : Un abris fermé sur les trois côtés avec 4 espaces de stockage personnalisables
-
-
-Changelog 1.1.0.0:
-Message d'avertissement revu lors de la livraison d'une botte d'un type différent de celui choisi dans la configuration du stockage.
-Ajout du support du "MaizePlus" pour les palettes lorsque le mod est actif sur la carte.
-
-Ajout de 3 nouveaux bâtiments:
-- Rack à palette: Une étagère avec 3 zones configurables
-- Abris pour palette: Un ancien abris converti en chambre froide avec 3 zones configurables, incluant des animations et des sons de réfrigération.
-- Entrepôt à palette: Un grand entrepôt avec 8 zones configurables, incluant des animations et des sons de réfrigération pour certains espaces.
-
-
-Changelog 1.0.1.0:
-Correction de l'avertissement de journal et des textures de nœud de visibilité manquantes pour les balles 'MaizePlus' et les autres balles mod ajoutées à la liste des balles sans fournir d'environnement mod ou de répertoire de base.
-
-]]>
-        </fr>
-        <ru>
-            <![CDATA[Оригинальное решение для хранения тюков и поддонов из FS17 и FS19 возвращается! Теперь с доступом к глобальному меню (GUI) еще проще увидеть, какие тюки или поддоны у вас есть на складе.
-
-Благодаря конфигурации типа наполнения и размера тюка (где доступно), пользователь может выбирать, что хранится на каждом из складов, и устраняет необходимость в отдельных складских позициях для каждого типа наполнения или размера тюка.
-
-Все товары, хранящиеся с использованием этой системы, будут возвращены пользователю в том виде, в котором они были доставлены, включая помимо прочего: вместимость, уровень заполнения и цвет упаковки тюков.
-
-Тюки, которые бродят при доставке, также будут бродить при хранении.
-
-Этот глобальный мод также включает в себя 7 здания для хранения тюков и поддонов. Поддержку внешних модов для использования его функций без необходимости индивидуальных скриптов и меню для каждого мода.
-
-
-# Входящие Размещаемые Здания #
-
-Навес Для Тюков:
-- Цена: 1200 €
-- Ежедневное Обслуживание: 5 €
-- Круглые Тюки: 125 см > 180 см
-- Квадратные Тюки: 180 см > 240 см
-- Типы Загружаемых Тюков: Все типы тюков, которые зарегистрированы как часть карты и находящиеся в пределах вышеуказанных размеров.
-
-Малый Навес Для Тюков:
-- Цена: 720 €
-- Ежедневное Обслуживание: 5 €
-- Квадратные Тюки: 49 см > 120 см
-- Типы Загружаемых Тюков: Все типы тюков, которые зарегистрированы как часть карты и находящиеся в пределах вышеуказанных размеров.
-
-Большой Навес Для Тюков:
-- Цена: 12400 €
-- Ежедневное Обслуживание: 10 €
-- Круглые Тюки: 125 см > 238 см
-- Квадратные Тюки: 180 см > 488 см
-- Типы Загружаемых Тюков: Все типы тюков, которые зарегистрированы как часть карты и находящиеся в пределах вышеуказанных размеров.
-
-Стеллаж:
-- Цена: 4200 €
-- Ежедневное Обслуживание: 8 €
-- Виды Загружаемых Поддонов: Семена, Корм Для Свиней, Известь, Овес (Корм Для Лошадей), Пшеница (Корм Для Кур), Дорожная Соль, Удобрения, Жидкие Удобрения, Гербициды, Минеральные Корма, Шерсть, Картофель, Сахарный Тростник, Тополь, Добавка Для Силоса, Жидкость Для Обработки Семян и LumiGEN
-
-Малый Стеллаж:
-- Цена: 2100 €
-- Ежедневное Обслуживание: 4 €
-- Виды Загружаемых Поддонов: Семена, Корм Для Свиней, Известь, Овес (Корм Для Лошадей), Пшеница (Корм Для Кур), Дорожная Соль, Удобрения, Жидкие Удобрения, Гербициды, Минеральные Корма, Шерсть, Картофель, Сахарный Тростник, Тополь, Добавка Для Силоса, Жидкость Для Обработки Семян и LumiGEN
-
-Малый Склад Поддонов:
-- Цена: 19300 €
-- Ежедневное Обслуживание: 10 €
-- Виды Загружаемых Поддонов: Большинство поддонов с типом заполнения, при правильной регистрации на карте.
-
-Склад Поддонов:
-- Цена: 94800 €
-- Ежедневное Обслуживание: 30 €
-- Виды Загружаемых Поддонов: Большинство поддонов с типом заполнения, при правильной регистрации на карте.
-
-# Примечания #
-- Маркеры зоны отгрузки можно отключить для каждого из вышеперечисленных зданий отдельно, встав в зону отгрузки, если это не требуется.
-- Входные триггеры можно отключить через графический интерфейс, чтобы упростить перемещение тюков после отгрузки или по мере необходимости.
-
-]]>
-        </ru>
-    </description>
-
-    <multiplayer supported="true"/>
-    <iconFilename>icon_objectStorage.dds</iconFilename>
-
-    <l10n filenamePrefix="translations/translation"/>
-
-    <extraSourceFiles>
-        <sourceFile filename="scripts/main.lua"/>
-    </extraSourceFiles>
-
-    <placeableSpecializations>
-        <specialization name="objectStorage" className="ObjectStoragePlaceable" filename="scripts/specializations/ObjectStoragePlaceable.lua" />
-    </placeableSpecializations>
-
-    <placeableTypes>
-        <type name="objectStorage" parent="simplePlaceable" className="Placeable" filename="$dataS/scripts/placeables/Placeable.lua" >
-            <specialization name="FS22_ObjectStorage.objectStorage"/> <!-- Add environment name to make sure my spec is used not the base game spec added v1.9.0.0 -->
-            <specialization name="infoTrigger" />
-        </type>
-    </placeableTypes>
-
-    <!-- Most used and base game fillTypes. Mods or maps adding custom bale fillTypes can add icons in the same way from their modDesc. -->
-    <objectStorage>
-        <baleHudOverlays>
-            <!-- Unknown Custom FillTypes -->
-            <hudOverlay isRoundbale="true"  fillType="unknown" filename="shared/hud/hud_fill_roundBaleUnknown.dds"/>
-            <hudOverlay isRoundbale="false" fillType="unknown" filename="shared/hud/hud_fill_squareBaleUnknown.dds"/>
-
-            <!-- Round Bales -->
-            <hudOverlay isRoundbale="true" fillType="straw" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleStraw.dds"/>
-            <hudOverlay isRoundbale="true" fillType="silage" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleSilage.dds"/>
-            <hudOverlay isRoundbale="true" fillType="cotton" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleCotton.dds"/>
-            <hudOverlay isRoundbale="true" fillType="woodchips" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleWood.dds"/>
-            <hudOverlay isRoundbale="true" fillType="drygrass_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleHay.dds"/>
-            <hudOverlay isRoundbale="true" fillType="grass_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleGrass.dds"/>
-
-            <!-- Film Binding Round Bales V1.9.0.0, no new icons added so using closest match -->
-            <hudOverlay isRoundbale="true" fillType="chaff" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleHay.dds"/>
-            <hudOverlay isRoundbale="true" fillType="forage" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleSilage.dds"/>
-            <hudOverlay isRoundbale="true" fillType="sugarBeet_cut" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleCotton.dds"/>
-
-            <!-- Custom Round Bale FillTypes -->
-            <hudOverlay isRoundbale="true" fillType="dryalfalfa_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleHay.dds"/>
-            <hudOverlay isRoundbale="true" fillType="alfalfa_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleGrass.dds"/>
-            <hudOverlay isRoundbale="true" fillType="dryclover_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleHay.dds"/>
-            <hudOverlay isRoundbale="true" fillType="clover_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleGrass.dds"/>
-            <hudOverlay isRoundbale="true" fillType="drylucerne_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleHay.dds"/>
-            <hudOverlay isRoundbale="true" fillType="lucerne_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleGrass.dds"/>
-
-            <!-- Maize Plus Round Bale FillTypes -->
-            <hudOverlay isRoundbale="true" fillType="wetgrass_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleGrass.dds"/>
-            <hudOverlay isRoundbale="true" fillType="semidrygrass_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleHay.dds"/>
-            <hudOverlay isRoundbale="true" fillType="crop_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleHay.dds"/>
-            <hudOverlay isRoundbale="true" fillType="choppedmaize" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleHay.dds"/>
-            <hudOverlay isRoundbale="true" fillType="grass_fermented" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleSilage.dds"/>
-            <hudOverlay isRoundbale="true" fillType="choppedmaize_fermented" filename="$dataS/menu/hud/fillTypes/hud_fill_roundBaleSilage.dds"/>
-
-            <!-- Square Bales -->
-            <hudOverlay isRoundbale="false" fillType="straw" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleStraw.dds"/>
-            <hudOverlay isRoundbale="false" fillType="silage" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleSilage.dds"/>
-            <hudOverlay isRoundbale="false" fillType="cotton" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleCotton.dds"/>
-            <hudOverlay isRoundbale="false" fillType="woodchips" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleWood.dds"/>
-            <hudOverlay isRoundbale="false" fillType="drygrass_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleHay.dds"/>
-            <hudOverlay isRoundbale="false" fillType="grass_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleGrass.dds"/>
-
-            <!-- Custom Square Bale FillTypes -->
-            <hudOverlay isRoundbale="false" fillType="dryalfalfa_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleHay.dds"/>
-            <hudOverlay isRoundbale="false" fillType="alfalfa_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleGrass.dds"/>
-            <hudOverlay isRoundbale="false" fillType="dryclover_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleHay.dds"/>
-            <hudOverlay isRoundbale="false" fillType="clover_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleGrass.dds"/>
-            <hudOverlay isRoundbale="false" fillType="drylucerne_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleHay.dds"/>
-            <hudOverlay isRoundbale="false" fillType="lucerne_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleGrass.dds"/>
-
-            <!-- Maize Plus Square Bale FillTypes -->
-            <hudOverlay isRoundbale="false" fillType="wetgrass_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleGrass.dds"/>
-            <hudOverlay isRoundbale="false" fillType="semidrygrass_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleHay.dds"/>
-            <hudOverlay isRoundbale="false" fillType="crop_windrow" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleHay.dds"/>
-            <hudOverlay isRoundbale="false" fillType="choppedmaize" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleHay.dds"/>
-            <hudOverlay isRoundbale="false" fillType="grass_fermented" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleSilage.dds"/>
-            <hudOverlay isRoundbale="false" fillType="choppedmaize_fermented" filename="$dataS/menu/hud/fillTypes/hud_fill_squareBaleSilage.dds"/>
-        </baleHudOverlays>
-    </objectStorage>
-
-    <brands>
-        <brand name="FARMING_INNOVATIONS" title="Farming Innovations" image="shared/brand_farmingInnovations.dds"/>
-    </brands>
-
-    <brandColors>
-        <color name="FARMINGINOVATIONS_LIGHTBLUE" value="0.1000 0.3000 0.8000 1"/>
-        <color name="FARMINGINOVATIONS_GREEN" value="0.0000 0.2051 0.0685 1"/>
-        <color name="FARMINGINOVATIONS_ORANGE" value="1.0000 0.1413 0.0000 1"/>
-        <color name="FARMINGINOVATIONS_PURPLE" value="0.3231 0.0252 0.3515 1"/>
-        <color name="FARMINGINOVATIONS_RED" value="0.3941 0.0084 0.0220 1"/>
-    </brandColors>
-
-    <storeItems>
-        <storeItem xmlFilename="placeables/coveredBaleStack/baleStack.xml"/>
-        <storeItem xmlFilename="placeables/smallCoveredBaleStack/baleStack.xml"/>
-        <storeItem xmlFilename="placeables/easyShedBaleStorage/easyShedBaleStorage.xml"/>
-        <storeItem xmlFilename="placeables/shelfSystem/shelfSystem.xml"/>
-        <storeItem xmlFilename="placeables/smallShelfSystem/shelfSystem.xml"/>
-        <storeItem xmlFilename="placeables/coldroomStorage/oldPalletShed.xml"/>
-        <storeItem xmlFilename="placeables/warehouseStorage/varikoPalletShed.xml"/>
-    </storeItems>
 </modDesc>
