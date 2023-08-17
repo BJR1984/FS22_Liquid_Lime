@@ -9,12 +9,12 @@ local function addSprayType(sprayName, appRate, spraytypeName, groundType, baseT
 		if g_sprayTypeManager:addSprayType(sprayName, appRate, spraytypeName, groundType, baseType) then
 			print("BJR1984-INFO: Added Spraytype - "..sprayName)
 		end
-	end	
+	end
 end
 
-local function appendLoadMapData(self)	
+local function appendLoadMapData(self)
 	print("BJR1984-INFO: Registering New Spray Types")
-	addSprayType("LIQUIDLIME", 0.0900, "LIME", 4, true)
+	addSprayType("LIQUIDLIME", 0.0162, "LIME", 4, true)
 end
 
 SprayTypeManager.loadMapData = Utils.appendedFunction(SprayTypeManager.loadMapData, appendLoadMapData)
@@ -23,7 +23,7 @@ SprayTypeManager.loadMapData = Utils.appendedFunction(SprayTypeManager.loadMapDa
 -- PRECISION FARMING - ADD LIQUIDLIME AS SPRAY TYPE
 --===============================================================
 
-local function injectPrecisionFarmingFunctions()	
+local function injectPrecisionFarmingFunctions()
 	if not _G['FS22_precisionFarming'] then
 		return
 	end
@@ -41,7 +41,7 @@ local function injectPrecisionFarmingFunctions()
 		local headline = g_i18n:getText("hudExtensionSprayer_headline_ph_liquidlime", "LIQUIDLIME")
 		local applicationRate = 0
 		local applicationRateReal = 0
-		local applicationRateStr = "%d l/ha"
+		local applicationRateStr = "%d.3 l/ha"
 		local changeBarText = ""
 		local minValue = 0
 		local maxValue = 0
@@ -53,26 +53,25 @@ local function injectPrecisionFarmingFunctions()
 				soilTypeName = soilType.name
 			end
 		end
-		local fillTypeDesc
 		local sourceVehicle, fillUnitIndex = self:getFillTypeSourceVehicle(self.vehicle)
 		local sprayFillType = sourceVehicle:getFillUnitFillType(fillUnitIndex)
 		fillTypeDesc = g_fillTypeManager:getFillTypeByIndex(sprayFillType)
-		local massPerLiter = (fillTypeDesc.massPerLiter / FillTypeManager.MASS_SCALE)
 		if sprayFillType ~= FillType.LIQUIDLIME then
 			return superFunc(self, leftPosX, rightPosX, posY)
 		end
 		local descriptionText = ""
 		local stepResolution
 		local enableZeroTargetFlag = false
+		local litersPerHectar = spec.lastLitersPerHectar
 -- Start of old if hasLimeLoaded then
 		self.gradientInactive:setUVs(self.isColorBlindMode and self.colorBlindGradientUVsInactive or self.pHGradientUVsInactive)
 		self.gradient:setUVs(self.isColorBlindMode and self.colorBlindGradientUVs or self.pHGradientUVs)
 		local pHChanged = 0
-		applicationRate = spec.lastLitersPerHectar * massPerLiter
+		applicationRate = litersPerHectar
 		if not spec.sprayAmountAutoMode then
 			local requiredLitersPerHa = self.pHMap:getLimeUsageByStateChange(spec.sprayAmountManual)
 			pHChanged = self.pHMap:getPhValueFromChangedStates(spec.sprayAmountManual)
-			applicationRate = requiredLitersPerHa * massPerLiter
+			applicationRate = requiredLitersPerHa
 			if pHChanged > 0 then
 				changeBarText = string.format("pH +%s", string.format("%.2f",pHChanged))
 			end
@@ -296,10 +295,12 @@ local function injectPrecisionFarmingFunctions()
 		if spec.isSolidFertilizerSprayer and fillTypeIndex == FillType.LIME then
 			local _, _, pHMaxValue = spec.pHMap:getMinMaxValue()
 			spec.sprayAmountManualMax = pHMaxValue - 1
+			spec.pHMap.limeUsage.usagePerState = 730
 			spec.isLimingActive = true
 		elseif spec.isLiquidFertilizerSprayer and fillTypeIndex == FillType.LIQUIDLIME then
 			local _, _, pHMaxValue = spec.pHMap:getMinMaxValue()
 			spec.sprayAmountManualMax = pHMaxValue - 1
+			spec.pHMap.limeUsage.usagePerState = 200
 			spec.isLimingActive = true
 		else
 			local _, _, nMaxValue = spec.nitrogenMap:getMinMaxValue()
@@ -318,7 +319,7 @@ local function injectPrecisionFarmingFunctions()
 					spec.lastGroundUpdateDistance = 0
 					local workArea = self:getWorkAreaByIndex(1)
 					if workArea ~= nil then
-						local x, y, z
+						local x, _y, z
 						-- if the work area starts in the middle of the vehicle we use the start node, otherwise the middle between start and width
 						local lx, _, _ = localToLocal(workArea.start, self.rootNode, 0, 0, 0)
 						if math.abs(lx) < 0.5 then
@@ -408,6 +409,11 @@ local function injectPrecisionFarmingFunctions()
 	ExtendedSprayer.getCurrentSprayerMode = Utils.overwrittenFunction(ExtendedSprayer.getCurrentSprayerMode, getCurrentSprayerMode_ExtendedSprayer)
 	ExtendedSprayer.onChangedFillType = Utils.overwrittenFunction(ExtendedSprayer.onChangedFillType, onChangedFillType_ExtendedSprayer)
 	ExtendedSprayer.onUpdate = Utils.overwrittenFunction(ExtendedSprayer.onUpdate, onUpdate_ExtendedSprayer)
+--[[
+	local function onLoad_WeedSpotSpray(self, superFunc, savegame)
+		local spec = self.spec_weedSpotSpray
+		spec.limeLevelMapId, spec.limeLevelFirstChannel, spec.limeLevelNumChannels = g_currentMission.fieldGroundSystem:getDensityMapData(FieldDensityMap.LIME_LEVEL)
+	end
 
 	local function onUpdate_WeedSpotSpray(self, superFunc, dt, isActiveForInput, isActiveForInputIgnoreSelection, isSelected)
 		local WeedSpotSpray = _G['FS22_precisionFarming'].WeedSpotSpray --Check if needed
@@ -426,13 +432,13 @@ local function injectPrecisionFarmingFunctions()
 								nozzleNode.lastActiveTime = g_time + spec.nozzleUpdateFrameDelay * dt * 1.5
 								spec.effectsDirty = true
 							end
-						elseif sprayFillType == FillType.LIQUIDFERTILIZER then
-							local x, y, z = localToWorld(nozzleNode.node, 0, 0, nozzleNode.zOffset * 2)
-							local densityBits = getDensityAtWorldPos(spec.sprayTypeMapId, x, y, z)
-							local sprayType = bitAND(bitShiftRight(densityBits, spec.sprayTypeFirstChannel), 2 ^ spec.sprayTypeNumChannels - 1)
+						elseif sprayFillType == FillType.LIQUIDLIME then
+							local x, y, z = localToWorld(nozzleNode.node, 0, 0, nozzleNode.zOffset)
+							local densityBits = getDensityAtWorldPos(spec.limeLevelMapId, x, y, z)
+							local sprayType = bitAND(bitShiftRight(densityBits, spec.limeLevelFirstChannel), 2 ^ spec.limeLevelNumChannels - 1)
 							local densityBitsGround = getDensityAtWorldPos(spec.groundTypeMapId, x, y, z)
 							local groundType = bitAND(bitShiftRight(densityBitsGround, spec.groundTypeFirstChannel), 2 ^ spec.groundTypeNumChannels - 1)
-							if groundType ~= 0 and sprayType ~= FieldSprayType.FERTILIZER then
+							if groundType ~= 0 and sprayType ~= FieldSprayType.LIME then
 								nozzleNode.lastActiveTime = g_time + spec.nozzleUpdateFrameDelay * dt * 1.5
 								spec.effectsDirty = true
 							end
@@ -442,7 +448,7 @@ local function injectPrecisionFarmingFunctions()
 							local sprayType = bitAND(bitShiftRight(densityBits, spec.sprayTypeFirstChannel), 2 ^ spec.sprayTypeNumChannels - 1)
 							local densityBitsGround = getDensityAtWorldPos(spec.groundTypeMapId, x, y, z)
 							local groundType = bitAND(bitShiftRight(densityBitsGround, spec.groundTypeFirstChannel), 2 ^ spec.groundTypeNumChannels - 1)
-							if groundType ~= 0 and sprayType ~= FieldSprayType.LIME then
+							if groundType ~= 0 and sprayType ~= FieldSprayType.FERTILIZER then
 								nozzleNode.lastActiveTime = g_time + spec.nozzleUpdateFrameDelay * dt * 1.5
 								spec.effectsDirty = true
 							end
@@ -461,8 +467,9 @@ local function injectPrecisionFarmingFunctions()
 	end
 
 	local WeedSpotSpray = _G['FS22_precisionFarming'].WeedSpotSpray
+	WeedSpotSpray.onLoad = Utils.appendedFunction(WeedSpotSpray.onLoad, onLoad_WeedSpotSpray)
 	WeedSpotSpray.onUpdate = Utils.overwrittenFunction(WeedSpotSpray.onUpdate, onUpdate_WeedSpotSpray)
-	
+]]
 	function loadFromItemsXML(self, xmlFile, key)
 		print("key: ".. tostring(key) )
 		print("statistics: ".. tostring(self.statisticsByFarmland) )
